@@ -44,3 +44,11 @@ def search_user_Desktop():
 	print "     Listing %s's Desktop"%usr
 	subprocess.call(["ls", "/home/%s/Deskto"%usr])
 	SleepTime()
+<<<<<<< Updated upstream
+=======
+
+def search_user_Documents():
+	print "     Listing %s's Desktop"%usr
+	subprocess.call(["ls", "/home/%s/Deskto"%usr])
+	SleepTime()
+>>>>>>> Stashed changes

@@ -2,7 +2,11 @@
 
 clear
 echo "********************************"
+<<<<<<< Updated upstream
 echo "*   Problem Fixer Version 1.0  *"
+=======
+echo "*     Bee-Secure Version 1.0   *"
+>>>>>>> Stashed changes
 echo "*   Made By Spencer McConnell  *"
 echo "********************************"
 
