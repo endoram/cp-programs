@@ -26,11 +26,11 @@ subprocess.call(["sudo", "sed", "-i", '160s/.*/PASS_MAX_DAYS	35/', "login.defs"]
 print
 
 
-utilities.pas_max_days()
+utilities.pass_max_days()
 
 print
 
-utilities.pas_min_days()
+utilities.pass_min_days()
 
 print
 
@@ -42,6 +42,6 @@ utilities.search_user_home()
 
 print
 
-utilities.search_user_Desktop()
+utilities.search_user_desktop()
 
 print
