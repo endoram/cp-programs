@@ -12,8 +12,6 @@ def SleepTime():
 def pass_max_days():
 	''' This fuction changes PASS_MAX_DAYS
 
-    :param: param1: no parameters
-	:returns: error
 	'''
 	print("********************************")
 	print("***  Changing PASS_MAX_DAYS  ***")
@@ -21,32 +19,30 @@ def pass_max_days():
 
 	subprocess.call(["sudo", "sed", "-i", '160s/.*/PASS_MAX_DAYS	35/', "login.defs"])
 	print("[Done]")
-	time.sleep(1)
+	SleepTime()
 
 def pass_min_days():
-	''' This fuction changes PASS_MIN_DAYS
+	#This fuction changes PASS_MIN_DAYS
 
-	    :param: param1: no parameters
-		:returns: error
-	'''
 	print
 	print("********************************")
-	print("***  Changing PASS_Min_DAYS  ***")
+	print("***  Changing PASS_MIN_DAYS  ***")
 	print("********************************")
+	print ("[Done]")
 
-while True
-	try
-		subprocess.call(["sudo", "sed", "-i", '161s/.*/PASS_MIN_DAYS	15/', "login.defs"])
-		print("[Done]")
-		time.sleep(1)
-	break
-	except: Value.Error:
-		print("Something went wrong.")
 
+#while
+#	try
+#		subprocess.call(["sudo", "sed", "-i", '161s/.*/PASS_MIN_DAYS	15/', "login.defs"])
+#		print("[Done]")
+#		time.sleep(1)
+#	break
+#	except: Value.Error:
+#		print("Something went wrong.")
 
 # Lists all home directory contents
 def search_home():
-	print("     Listing /home"
+	print("     Listing /home")
 	subprocess.call(["ls", "/home"])
 	SleepTime()
 
@@ -59,13 +55,10 @@ def search_user_home():
 # Lists user's desktop directory
 def search_user_desktop():
 	print("     Listing %s's Desktop"%usr)
-	subprocess.call(["ls", "/home/%s/Deskto"%usr])
+	subprocess.call(["ls", "/home/%s/Desktop"%usr])
 	SleepTime()
-<<<<<<< Updated upstream
-=======
 
 def search_user_Documents():
 	print "     Listing %s's Desktop"%usr
-	subprocess.call(["ls", "/home/%s/Deskto"%usr])
+	subprocess.call(["ls", "/home/%s/Desktop"%usr])
 	SleepTime()
->>>>>>> Stashed changes

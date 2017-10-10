@@ -1,5 +1,5 @@
 
-import utilities
+import util
 import os
 import subprocess
 
@@ -16,32 +16,32 @@ usr = os.getlogin()
 
 subprocess.call(["clear"])
 
-print "********************************"
-print "*        Bee-Secure 1.0        *"
-print "*   Made By Spencer McConnell  *"
-print "********************************"
+print ("********************************")
+print ("*        Bee-Secure 1.0        *")
+print ("*   Made By Spencer McConnell  *")
+print ("********************************")
 
 os.chdir("/etc")
 subprocess.call(["sudo", "sed", "-i", '160s/.*/PASS_MAX_DAYS	35/', "login.defs"])
 print
 
 
-utilities.pass_max_days()
+util.pass_max_days()
 
 print
 
-utilities.pass_min_days()
+util.pass_min_days()
 
 print
 
-utilities.search_home()
+util.search_home()
 
 print
 
-utilities.search_user_home()
+util.search_user_home()
 
 print
 
-utilities.search_user_desktop()
+util.search_user_desktop()
 
 print
