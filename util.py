@@ -35,6 +35,7 @@ def disable_guest_login():
 	os.chdir("/usr/share/lightdm/lightdm.conf.d")
 	subprocess.call(["sudo", "sed", "-i", '3s/.*/allow-guests=false/', "50-ubuntu.conf"])
 	print("[Done]")
+	
 
 def enable_firewall():
 	#This funtion turns on the firewall

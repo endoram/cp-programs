@@ -14,6 +14,7 @@ import subprocess
 
 usr = os.getlogin()
 
+
 subprocess.call(["clear"])
 
 print ("********************************")
