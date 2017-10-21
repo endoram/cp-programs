@@ -22,26 +22,59 @@ def pass_min_days():
 	print("Changing PASS_MIN_DAYS to 17")
 	subprocess.call(["sudo", "sed", "-i", '161s/.*/PASS_MIN_DAYS	15/', "login.defs"])
 	print ("[Done]")
+	SleepTime()
 
 def pass_warn_age():
 	#This function changes PASS_WARN_AGE to 7
 	print("Chaning PASS_WARN_AGE to 7")
 	subprocess.call(["sudo", "sed", "-i", '162s/.*/PASS_WARN_AGE	7/', "login.defs"])
 	print("[Done]")
+	SleepTime()
 
 def disable_guest_login():
 	#This fuction diables the guest login
+	#var_disable_guest is equal to what the gedit file should look like
+	var_disable_guest = ['[Seat:*]\n', 'user-session=ubuntu\n', 'allow-guests=false\n']
+
 	print("Disabling guest login")
 	os.chdir("/usr/share/lightdm/lightdm.conf.d")
-	subprocess.call(["sudo", "sed", "-i", '3s/.*/allow-guests=false/', "50-ubuntu.conf"])
-	print("[Done]")
-	
+
+	#Read 50-ubuntu.conf set the lines to content
+	with open("50-ubuntu.conf") as f:
+		content = f.readlines()
+
+	#Check that the file equals var_disable_guest
+	if (content == var_disable_guest):
+		print("[Checked]")
+
+	# if it does not equal then add the line allow-guests=false
+	else:
+		subprocess.call(["sudo", "sed", "-i", '/user-session=ubuntu/ a\
+		allow-guests=false', "50-ubuntu.conf"])
+		#print("[Done]")
+
+	#Read 50-ubuntu.conf set the lines to content
+	with open("50-ubuntu.conf") as f:
+		content = f.readlines()
+
+	#This is a check for the system
+	#If content equals var_disable_guest then do nothing
+	#Else print failed
+	if (content == var_disable_guest):
+		print("[Done]")
+	else:
+		print("[Failed]")
+		print(content)
+
+	SleepTime()
+
 
 def enable_firewall():
 	#This funtion turns on the firewall
 	print("Enabling firewall")
 	subprocess.call(["sudo", "ufw", "enable"])
 	print("[Done]")
+	SleepTime()
 
 #while
 #	try
