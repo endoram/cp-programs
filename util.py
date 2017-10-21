@@ -32,7 +32,7 @@ def pass_warn_age():
 	SleepTime()
 
 def disable_guest_login():
-	#This fuction diables the guest login
+	#This fuction disables the guest login
 	#var_disable_guest is equal to what the gedit file should look like
 	var_disable_guest = ['[Seat:*]\n', 'user-session=ubuntu\n', 'allow-guests=false\n']
 
