@@ -10,6 +10,17 @@ usr = os.getlogin()
 def SleepTime():
 	time.sleep(1)
 
+def ssh_secure():
+	#This function makes ssh not be able to do root login and changes protocal 1 to 2
+	os.chdir("/etc/ssh/")
+	print("Disabling root login")
+
+def min_password_length():
+	os.chdir("/etc/pam.d/")
+	print("Changing minimum password lenght to 8")
+	subprocess.call(["sudo", "sed", "-i", '17s/.*/pam_unix.so minlen=8/', "common-password"])
+	print("[Done]")
+
 def pass_max_days():
 	#This fuction changes PASS_MAX_DAYS to 35
 	print("Changing PASS_MAX_DAYS to 35")
@@ -68,7 +79,6 @@ def disable_guest_login():
 
 	SleepTime()
 
-
 def enable_firewall():
 	#This funtion turns on the firewall
 	print("Enabling firewall")
@@ -76,34 +86,26 @@ def enable_firewall():
 	print("[Done]")
 	SleepTime()
 
-#while
-#	try
-#		subprocess.call(["sudo", "sed", "-i", '161s/.*/PASS_MIN_DAYS	15/', "login.defs"])
-#		print("[Done]")
-#		time.sleep(1)
-#	break
-#	except: Value.Error:
-#		print("Something went wrong.")
-
-# Lists all home directory contents
 def search_home():
+	# Lists all home directory contents
 	print("     Listing /home")
 	subprocess.call(["ls", "/home"])
 	SleepTime()
 
-# Lists user's home directory contents
 def search_user_home():
+	# Lists user's home directory contents
 	print("     Listing home of %s" %usr)
 	subprocess.call(["ls", "/home/%s"%usr])
 	SleepTime()
 
-# Lists user's desktop directory
 def search_user_desktop():
+	# Lists user's desktop directory
 	print("     Listing %s's Desktop"%usr)
 	subprocess.call(["ls", "/home/%s/Desktop"%usr])
 	SleepTime()
 
 def search_user_Documents():
+	#searches users documnets folder
 	print "     Listing %s's Desktop"%usr
 	subprocess.call(["ls", "/home/%s/Desktop"%usr])
 	SleepTime()

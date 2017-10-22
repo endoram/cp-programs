@@ -38,6 +38,9 @@ print
 util.disable_guest_login()
 print
 
+#util.min_password_length()
+#print
+
 util.enable_firewall()
 print
 
