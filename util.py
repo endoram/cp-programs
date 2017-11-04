@@ -15,10 +15,23 @@ def ssh_secure():
 	os.chdir("/etc/ssh/")
 	print("Disabling root login")
 
+###########################################################
+'''
+this as of now bricks your passwrord
+makes it so you cant login
+
 def min_password_length():
 	os.chdir("/etc/pam.d/")
 	print("Changing minimum password lenght to 8")
 	subprocess.call(["sudo", "sed", "-i", '17s/.*/pam_unix.so minlen=8/', "common-password"])
+	print("[Done]")
+'''
+###########################################################
+
+def set_root_password():
+	#This adds a root password
+	print("Setting root password")
+	subprocess.call(["sudo", "passwd", "root"])
 	print("[Done]")
 
 def pass_max_days():
