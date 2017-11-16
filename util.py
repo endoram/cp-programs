@@ -10,6 +10,18 @@ usr = os.getlogin()
 def SleepTime():
 	time.sleep(1)
 
+def bum():
+	print("Installing bum")
+	subprocess.call("sudo", "apt-get", "install", "bum"])
+	print("[Done]")
+	
+def audit():
+	#This function installs auditd and enables it
+	print("Installing auditd")
+	subprocess.call(["sudo", "apt-get", "install", "auditd"])
+	subprocess.call("sudo", "auditctl –e 1")
+	print("[Done]")
+
 def ssh_secure():
 	#This function makes ssh not be able to do root login and changes protocal 1 to 2
 	os.chdir("/etc/ssh/")
