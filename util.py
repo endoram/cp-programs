@@ -1,4 +1,6 @@
 
+# coding: utf-8
+
 import subprocess
 import time
 import os
@@ -29,14 +31,15 @@ def SleepTime():
 
 def bum():
 	print("Installing bum")
-	subprocess.call("sudo", "apt-get", "install", "bum"])
+	subprocess.call(["sudo", "apt-get", "install", "bum"])
 	print("[Done]")
-	
+
 def audit():
 	#This function installs auditd and enables it
 	print("Installing auditd")
 	subprocess.call(["sudo", "apt-get", "install", "auditd"])
-	subprocess.call("sudo", "auditctl –e 1")
+	print("Turing on auditd")
+	subprocess.call(["sudo", "auditctl", "–e", "1"])
 	print("[Done]")
 
 def ssh_secure():

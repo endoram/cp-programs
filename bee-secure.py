@@ -31,6 +31,12 @@ if uinput == yes:
     subprocess.call(["sudo", "sed", "-i", '160s/.*/PASS_MAX_DAYS	35/', "login.defs"])
     print
 
+    util.bum()
+    print
+
+    util.audit()
+    print
+
     util.pass_max_days()
     print
 
@@ -53,9 +59,6 @@ if uinput == yes:
     print
 
     util.findpackagev1()
-    print
-
-    util.search_home()
     print
 
     util.search_home()
