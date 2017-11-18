@@ -19,7 +19,7 @@ no = "n"
 subprocess.call(["clear"])
 
 print ("********************************")
-print ("*        Bee-Secure 1.0        *")
+print ("*        Bee-Secure 1.5        *")
 print ("*   Made By Spencer McConnell  *")
 print ("********************************")
 
