@@ -13,7 +13,8 @@ import subprocess
 '''
 
 usr = os.getlogin()
-
+yes = "y"
+no = "n"
 
 subprocess.call(["clear"])
 
@@ -22,36 +23,43 @@ print ("*        Bee-Secure 1.0        *")
 print ("*   Made By Spencer McConnell  *")
 print ("********************************")
 
-os.chdir("/etc")
-subprocess.call(["sudo", "sed", "-i", '160s/.*/PASS_MAX_DAYS	35/', "login.defs"])
-print
+uinput = raw_input("Do you want to run your normal script? [y/n]")
 
-util.pass_max_days()
-print
+if uinput == yes:
+    print("Proceding")
+    os.chdir("/etc")
+    subprocess.call(["sudo", "sed", "-i", '160s/.*/PASS_MAX_DAYS	35/', "login.defs"])
+    print
 
-util.pass_min_days()
-print
+    util.pass_max_days()
+    print
 
-util.pass_warn_age()
-print
+    util.pass_min_days()
+    print
 
-util.disable_guest_login()
-print
+    util.pass_warn_age()
+    print
 
-util.set_root_password()
-print
+    #util.disable_guest_login()
+    #print
 
-#util.min_password_length()
-#print
+    util.set_root_password()
+    print
 
-util.enable_firewall()
-print
+    #util.password_policy()
+    #print
 
-util.search_home()
-print
+    util.enable_firewall()
+    print
 
-util.search_user_home()
-print
+    util.findpackagev1()
+    print
 
-util.search_user_desktop()
-print
+    util.search_home()
+    print
+
+    util.search_home()
+    print
+
+else:
+    print("Would you like to play a game?")

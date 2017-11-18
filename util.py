@@ -6,6 +6,23 @@ import os
 # Variables
 usr = os.getlogin()
 
+#This is a list of all the things to find(refer to findpackage())
+list1 = ["*.png", "*nmap*", "*.mp4", "*.wav", "*rainbow*", "*crack*", "*.mp3", "*hyd*"]
+
+
+def findpackagev1():
+	#This function looks for the files in list1
+	z = 0
+	a = 0
+	print("Searching For files")
+	#While loop that goes through and checks every word in list1
+	while z <= 6:
+		print(list1[a])
+		subprocess.call(["sudo", "find", "/home", "-name", list1[a]])
+		print("#############################################################")
+		a = a + 1
+		z = z + 1
+
 # Sleeper function
 def SleepTime():
 	time.sleep(1)
@@ -15,24 +32,20 @@ def ssh_secure():
 	os.chdir("/etc/ssh/")
 	print("Disabling root login")
 
-###########################################################
-'''
-this as of now bricks your passwrord
-makes it so you cant login
 
-def min_password_length():
+def password_policy():
 	os.chdir("/etc/pam.d/")
 	print("Changing minimum password lenght to 8")
 	subprocess.call(["sudo", "sed", "-i", '17s/.*/pam_unix.so minlen=8/', "common-password"])
 	print("[Done]")
-'''
-###########################################################
+
 
 def set_root_password():
 	#This adds a root password
 	print("Setting root password")
 	subprocess.call(["sudo", "passwd", "root"])
 	print("[Done]")
+
 
 def pass_max_days():
 	#This fuction changes PASS_MAX_DAYS to 35
@@ -41,12 +54,14 @@ def pass_max_days():
 	print("[Done]")
 	SleepTime()
 
+
 def pass_min_days():
 	#This fuction changes PASS_MIN_DAYS to 17
 	print("Changing PASS_MIN_DAYS to 17")
 	subprocess.call(["sudo", "sed", "-i", '161s/.*/PASS_MIN_DAYS	15/', "login.defs"])
 	print ("[Done]")
 	SleepTime()
+
 
 def pass_warn_age():
 	#This function changes PASS_WARN_AGE to 7
@@ -55,16 +70,17 @@ def pass_warn_age():
 	print("[Done]")
 	SleepTime()
 
+
 def disable_guest_login():
 	#This fuction disables the guest login
 	#var_disable_guest is equal to what the gedit file should look like
-	var_disable_guest = ['[Seat:*]\n', 'user-session=ubuntu\n', 'allow-guests=false\n']
+	var_disable_guest = ['[SeatDefaults]\n', 'greeter-session=unity-greeter\n', 'user-session=ubuntu\n', 'allow-guests=false\n']
 
 	print("Disabling guest login")
-	os.chdir("/usr/share/lightdm/lightdm.conf.d")
+	os.chdir("/etc/lightdm/lightdm.conf")
 
-	#Read 50-ubuntu.conf set the lines to content
-	with open("50-ubuntu.conf") as f:
+	#Read lightdm.conf set the lines to content
+	with open("lightdm.conf") as f:
 		content = f.readlines()
 
 	#Check that the file equals var_disable_guest
@@ -77,8 +93,8 @@ def disable_guest_login():
 		allow-guests=false', "50-ubuntu.conf"])
 		#print("[Done]")
 
-	#Read 50-ubuntu.conf set the lines to content
-	with open("50-ubuntu.conf") as f:
+	#Read lightdm.conf set the lines to content
+	with open("lightdm.conf") as f:
 		content = f.readlines()
 
 	#This is a check for the system
@@ -92,6 +108,7 @@ def disable_guest_login():
 
 	SleepTime()
 
+
 def enable_firewall():
 	#This funtion turns on the firewall
 	print("Enabling firewall")
@@ -99,26 +116,9 @@ def enable_firewall():
 	print("[Done]")
 	SleepTime()
 
+
 def search_home():
 	# Lists all home directory contents
 	print("     Listing /home")
 	subprocess.call(["ls", "/home"])
-	SleepTime()
-
-def search_user_home():
-	# Lists user's home directory contents
-	print("     Listing home of %s" %usr)
-	subprocess.call(["ls", "/home/%s"%usr])
-	SleepTime()
-
-def search_user_desktop():
-	# Lists user's desktop directory
-	print("     Listing %s's Desktop"%usr)
-	subprocess.call(["ls", "/home/%s/Desktop"%usr])
-	SleepTime()
-
-def search_user_Documents():
-	#searches users documnets folder
-	print "     Listing %s's Desktop"%usr
-	subprocess.call(["ls", "/home/%s/Desktop"%usr])
 	SleepTime()
