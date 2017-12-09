@@ -31,6 +31,9 @@ if uinput == yes:
     subprocess.call(["sudo", "sed", "-i", '160s/.*/PASS_MAX_DAYS	35/', "login.defs"])
     print
 
+    util.logfile()
+    print
+
     util.bum()
     print
 

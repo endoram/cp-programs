@@ -1,4 +1,3 @@
-
 # coding: utf-8
 
 import subprocess
@@ -7,6 +6,15 @@ import os
 
 # Variables
 usr = os.getlogin()
+
+
+def logfile():
+	print("Logging")
+	f = open("Bee-Secure Log.txt", "w+")
+	f.write("Hey does it work")
+	f.close()
+	print("Did it work")
+
 
 #This is a list of all the things to find(refer to findpackage())
 list1 = ["*.png", "*nmap*", "*.mp4", "*.wav", "*rainbow*", "*crack*", "*.mp3", "*hyd*"]
