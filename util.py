@@ -10,14 +10,16 @@ usr = os.getlogin()
 
 def logfile():
 	print("Logging")
-	f = open("Bee-Secure Log.txt", "w+")
+	f = open("Bee-SecureLog.txt", "w+")
+	print("Hey")
 	f.write("Hey does it work")
+	print("Hey2")
 	f.close()
 	print("Did it work")
 
 
 #This is a list of all the things to find(refer to findpackage())
-list1 = ["*.png", "*nmap*", "*.mp4", "*.wav", "*rainbow*", "*crack*", "*.mp3", "*hyd*"]
+list1 = ["*.png", "*nmap*", "*.mp4", "*.wav", "*rainbow*", "*crack*", "*.mp3", "*hyd*", "*wireshark*", "*.jpeg", "*.*"]
 
 
 def findpackagev1():
@@ -26,7 +28,7 @@ def findpackagev1():
 	a = 0
 	print("Searching For files")
 	#While loop that goes through and checks every word in list1
-	while z <= 6:
+	while z <= 10:
 		print(list1[a])
 		subprocess.call(["sudo", "find", "/home", "-name", list1[a]])
 		print("#############################################################")
@@ -94,10 +96,11 @@ def pass_warn_age():
 	SleepTime()
 
 
+
 def disable_guest_login():
 	#This fuction disables the guest login
 	#var_disable_guest is equal to what the gedit file should look like
-	var_disable_guest = ['[SeatDefaults]\n', 'greeter-session=unity-greeter\n', 'user-session=ubuntu\n', 'allow-guests=false\n']
+	var_disable_guest = ['[Seat:*]\n', 'greeter-session=unity-greeter\n', 'user-session=ubuntu\n', 'allow-guests=false\n']
 
 	print("Disabling guest login")
 	os.chdir("/etc/lightdm/lightdm.conf")
