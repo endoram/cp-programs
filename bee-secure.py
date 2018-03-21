@@ -1,8 +1,9 @@
+import os
+import subprocess, shlex
+
+subprocess.call(["sudo", "pip", "install", "termcolor"])
 
 import util
-import os
-import subprocess
-
 
 ''' Bee-Secure is a Python script for making Ubuntu VM's more secure for Cyber Patriot teams.
     It was written by Spencer McConnell and is licensed under GPL 3.0.
@@ -31,10 +32,16 @@ if uinput == yes:
     subprocess.call(["sudo", "sed", "-i", '160s/.*/PASS_MAX_DAYS	35/', "login.defs"])
     print
 
-    util.logfile()
-    print
+    subprocess.call(["sudo", "pip", "install", "termcolor"])
+    from termcolor import colored, cprint
+
+#    util.logfile()
+#    print
 
     util.bum()
+    print
+
+    util.pammod()
     print
 
     util.audit()
@@ -64,8 +71,11 @@ if uinput == yes:
     util.findpackagev1()
     print
 
-    util.search_home()
-    print
+    print("Pick default broswer:")
+    subprocess.call(shlex.split("sudo update-alternatives --config x-www-browser"))
+
+    util.users()
+
 
 else:
     print("Would you like to play a game?")

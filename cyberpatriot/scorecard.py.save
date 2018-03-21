@@ -1,0 +1,86 @@
+#!/usr/bin/python3
+
+from tkinter import *				#import window manager
+import re, time, threading, os			#import re to orginse the incoming string, time to keep track of time and threading to do more then 1 thing
+from tkinter import messagebox		#Import this to help shutdown the whole  script
+
+
+global switch, z, complete
+switch = 1
+complete = 0
+totalscored = 0
+x = 0
+#z = 0
+
+class scorecard:
+	def __init__(self, root):
+		print("Starting scorecard")
+		global complete, totalscored
+		switch = 0
+
+		#Now we start building the window
+		title = Label(root, font="Helvetica 44 bold", text="Spencer McConnell Special Ubuntu 16 Round", background="white").pack(side=TOP)
+		outof = Label(root, font=22, text="{0} out of {1} scored security issues fixed.".format(complete, totalscored)).pack(side=LEFT, anchor=N)
+
+	def startcard(root, self):
+		global complete
+		#The next four lines opens the output from scoregen.py and puts it into a readable varible
+		os.chdir("/home/spencer/program/python/cyberpatriot")
+		file = open("output.txt")
+		input = file.readlines()		#Reads the lines
+		input = str(input)			#Puts into var input
+		input =re.sub("\D", "", input)		#Creates finnal output of 100110101
+	#	print(input)
+
+		input1 = input				#Creates dublicate of the input
+		totalscored = input1.strip("0")		#Strips all 0s
+		totalscored = len(totalscored)		#Gets lenght of all scored things(This tells me how many issues need fixing)
+	#	print(totalscored)
+
+		totalpoints = 0
+
+		spacer1 = Label(root, background="white").pack()
+		spacer = Label(root, background="white").pack()
+		points = Label(root, font="Helvetica 33 bold", text="{0} of of 100 points received".format(totalpoints), background="white").pack()
+	#	outof = Label(root, font=22, text="{0} out of {1} scored security issues fixed.".format(complete, totalscored)).pack(side=LEFT, anchor=N)
+		spacer2 = Label(root, font="33", text=" ", background="white").pack()
+
+		input2 = input			#Crating another dublicate
+
+		check = input[0]
+		check = str(check)
+		print(check)
+		if check == "1":
+		#	print("Hey")
+			os.chdir("/etc/ssh")
+			if "PermitRootLogin no" in open("sshd_config").read():
+				print("Scoring PermitROotLogin no")
+				complete = 1
+				print(complete)
+#			print("Its not working")
+
+
+
+		root.after(1000, scorecard.startcard())
+
+#	root.mainloop()
+
+def callback():
+	if messagebox.askokcancel("Quit", "Do you want to quit?"):
+		root.destroy()
+		z = 1
+
+
+root = Tk()
+root.protocol("WM_DELETE_WINDOW", callback)
+root.configure(background="white")
+
+score = scorecard(root)
+root.after(0, score.startcard)
+
+
+#sm = threading.Thread(target=scorecard.startcard(root))
+#sm.start()
+#print("Thread started")
+
+root.mainloop()
