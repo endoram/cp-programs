@@ -1,4 +1,4 @@
-# coding: utf-8
+# -*- coding: utf-8 -*-
 
 import subprocess, logging		#import subprocess to run nix commands import logging to log events and debug
 import time
