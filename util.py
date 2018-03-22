@@ -1,6 +1,6 @@
 # coding: utf-8
 
-import subprocess
+import subprocess, logging		#import subprocess to run nix commands import logging to log events and debug
 import time
 import os, shlex
 from termcolor import colored, cprint
@@ -8,23 +8,49 @@ from termcolor import colored, cprint
 # Variables
 usr = os.getlogin()
 done = colored('[Done]', 'blue')
-
-
-def logfile():
-	print("Logging")
-	f = open("Bee-SecureLog.txt", "w+")
-	print("Hey")
-	f.write("Hey does it work")
-	print("Hey2")
-	f.close()
-	print("Did it work")
+level1 = ""
 
 
 #This is a list of all the things to find(refer to findpackage())
 list1 = ["*.png", "*nmap*", "*.mp4", "*.wav", "*rainbow*", "*crack*", "*.mp3", "*hyd*", "*wireshark*", "*.jpeg"]
 
 
-def findpackagev1():
+
+def startlog():
+	'''startlog starts the log file for bee-secure.log'''
+	subprocess.call(["sudo", "rm", "bee-secure.log"])
+
+	logging.basicConfig(filename="bee-secure.log",format='%(asctime)s %(levelname)s:%(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+	logging.getLogger().setLevel(logging.INFO)
+	logging.info("Log is a GO")
+
+
+	print("0 = Debug")
+	print("1 = Info")
+	print("2 = Warning")
+	print("3 = Error")
+	level1 = raw_input("What level of logging:")
+
+	if (level1 == str(0)):
+		logging.getLogger().setLevel(logging.DEBUG)
+		logging.info("Logging level set to DEBUG")
+
+	if (level1 == str(1)):
+		logging.getLogger().setLevel(logging.INFO)
+		logging.info("Logging level set to INFO")
+
+	if (level1 == str(2)):
+		logging.getLogger().setLevel(logging.WARNING)
+		logging.info("Logging level set to WARNING")
+
+	if (level1 == str(3)):
+		logging.getLogger().setLevel(logging.ERROR)
+		logging.info("Logging level set to ERROR")
+
+	logging.debug("Log level setting complete")
+
+
+def findpackagev(): 
 	#This function looks for the files in list1
 	z = 0
 	print("Searching For files")
@@ -35,6 +61,7 @@ def findpackagev1():
 		text = colored('#########################################################', 'red')
     		print(text)
 		z = z + 1
+	logging.info("Find package is [DONE]")
 
 # Sleeper function
 def SleepTime():
@@ -44,6 +71,7 @@ def bum():
 	print("Installing bum")
 	subprocess.call(["sudo", "apt-get", "install", "bum"])
 	print(done)
+	logging.info("Installing bum [DONE]")
 
 def audit():
 	#This function installs auditd and enables it
@@ -52,6 +80,7 @@ def audit():
 	print("Turing on auditd")
 	subprocess.call(["sudo", "auditctl", "–e", "1"])
 	print(done)
+	logging.info("Installing auditd [DONE]")
 
 def ssh_secure():
 	#This function makes ssh not be able to do root login and changes protocal 1 to 2
@@ -64,6 +93,7 @@ def password_policy():
 	print("Changing minimum password lenght to 8")
 	subprocess.call(["sudo", "sed", "-i", '17s/.*/pam_unix.so minlen=8/', "common-password"])
 	print(done)
+	logging.info("password_policy at pam.d [DONE]")
 
 
 def set_root_password():
@@ -71,6 +101,7 @@ def set_root_password():
 	print("Setting root password")
 	subprocess.call(["sudo", "passwd", "root"])
 	print(done)
+	logging.info("Seting root password [DONE]")
 
 
 def pass_max_days():
