@@ -1,7 +1,8 @@
 import os, logging                       #import os to easily change dir import logging to log events and debug
 import subprocess, shlex, sys
 
-subprocess.call(["sudo", "pip", "install", "termcolor"])       #Installs termcolor to make it look fun
+subprocess.call(["sudo", "pip", "install", "termcolor"])	#Installs termcolor to make it look fun
+subprocess.call(["sudo", "apt-get", "install", "python"])	#Installs latest version of python
 
 import util             #Import the other file required to make it work
 
