@@ -13,7 +13,7 @@ import util             #Import the other file required to make it work
     Python Version: 2.0
 '''
 
-usr = spencer
+usr = "spencer"
 yes = "y"
 no = "n"
 
