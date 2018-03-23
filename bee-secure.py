@@ -3,6 +3,8 @@ import subprocess, shlex, sys
 
 subprocess.call(["sudo", "pip", "install", "termcolor"])	#Installs termcolor to make it look fun
 subprocess.call(["sudo", "apt-get", "install", "python"])	#Installs latest version of python
+subprocess.call(["sudo", "apt-get", "update"])
+subprocess.call(["sudo", "apt-get", "update"])
 
 import util             #Import the other file required to make it work
 
