@@ -6,7 +6,7 @@ import os, shlex
 from termcolor import colored, cprint
 
 # Variables
-usr = os.getlogin()
+usr = spencer
 done = colored('[Done]', 'blue')
 level1 = ""
 

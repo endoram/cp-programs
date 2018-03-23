@@ -1,9 +1,9 @@
-import os
+import os, logging                       #import os to easily change dir import logging to log events and debug
 import subprocess, shlex
 
-subprocess.call(["sudo", "pip", "install", "termcolor"])
+subprocess.call(["sudo", "pip", "install", "termcolor"])       #Installs termcolor to make it look fun
 
-import util
+import util             #Import the other file required to make it work
 
 ''' Bee-Secure is a Python script for making Ubuntu VM's more secure for Cyber Patriot teams.
     It was written by Spencer McConnell and is licensed under GPL 3.0.
@@ -13,7 +13,7 @@ import util
     Python Version: 2.0
 '''
 
-usr = os.getlogin()
+usr = spencer
 yes = "y"
 no = "n"
 
@@ -23,6 +23,8 @@ print ("********************************")
 print ("*        Bee-Secure 1.5        *")
 print ("*   Made By Spencer McConnell  *")
 print ("********************************")
+
+util.startlog()
 
 uinput = raw_input("Do you want to run your normal script? [y/n]")
 
@@ -34,9 +36,6 @@ if uinput == yes:
 
     subprocess.call(["sudo", "pip", "install", "termcolor"])
     from termcolor import colored, cprint
-
-#    util.logfile()
-#    print
 
     util.bum()
     print
@@ -68,7 +67,7 @@ if uinput == yes:
     util.enable_firewall()
     print
 
-    util.findpackagev1()
+    util.findpackagev()
     print
 
     print("Pick default broswer:")
