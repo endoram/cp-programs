@@ -1,5 +1,5 @@
 import os, logging                       #import os to easily change dir import logging to log events and debug
-import subprocess, shlex
+import subprocess, shlex, sys
 
 subprocess.call(["sudo", "pip", "install", "termcolor"])       #Installs termcolor to make it look fun
 
@@ -26,9 +26,15 @@ print ("********************************")
 
 util.startlog()
 
-uinput = raw_input("Do you want to run your normal script? [y/n]")
 
-if uinput == yes:
+script = sys.argv[2:]
+if (script == []):script.append(5)
+
+if (script[0] == 5):
+	script[0] = raw_input("Do you want to run your normal script? [y/n]")
+
+
+if (script[0] == yes):
     print("Proceding")
     os.chdir("/etc")
     subprocess.call(["sudo", "sed", "-i", '160s/.*/PASS_MAX_DAYS	35/', "login.defs"])
