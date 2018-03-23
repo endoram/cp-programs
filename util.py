@@ -2,13 +2,13 @@
 
 import subprocess, logging		#import subprocess to run nix commands import logging to log events and debug
 import time
-import os, shlex
+import os, shlex, sys
 from termcolor import colored, cprint
 
 # Variables
 usr = "spencer"
 done = colored('[Done]', 'blue')
-level1 = ""
+level1 = ['5']
 
 
 #This is a list of all the things to find(refer to findpackage())
@@ -22,28 +22,34 @@ def startlog():
 
 	logging.basicConfig(filename="bee-secure.log",format='%(asctime)s %(levelname)s:%(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 	logging.getLogger().setLevel(logging.INFO)
-	logging.info("Log is a GO")
+	logging.info("Log is started")
 
 
-	print("0 = Debug")
-	print("1 = Info")
-	print("2 = Warning")
-	print("3 = Error")
-	level1 = raw_input("What level of logging:")
+	level1 = sys.argv[1:]
+	if (level1 == []):level1.append(5)
 
-	if (level1 == str(0)):
+	if (level1[0] == 5):
+		print("0 = Debug")
+		print("1 = Info")
+		print("2 = Warning")
+		print("3 = Error")
+
+		level1[0] = raw_input("What level of logging:")
+
+
+	if (level1[0] == str(0)):
 		logging.getLogger().setLevel(logging.DEBUG)
 		logging.info("Logging level set to DEBUG")
 
-	if (level1 == str(1)):
+	if (level1[0] == str(1)):
 		logging.getLogger().setLevel(logging.INFO)
 		logging.info("Logging level set to INFO")
 
-	if (level1 == str(2)):
+	if (level1[0] == str(2)):
 		logging.getLogger().setLevel(logging.WARNING)
 		logging.info("Logging level set to WARNING")
 
-	if (level1 == str(3)):
+	if (level1[0] == str(3)):
 		logging.getLogger().setLevel(logging.ERROR)
 		logging.info("Logging level set to ERROR")
 
