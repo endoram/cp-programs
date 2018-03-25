@@ -10,7 +10,6 @@ echo "*     Bee-Secure Version 1.0   *"
 echo "*   Made By Spencer McConnell  *"
 echo "********************************"
 
-echo
 
 cd /etc
 
