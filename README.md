@@ -3,8 +3,8 @@ security scripts
 
 Made by Spencer McConnell
 
-about me
-I'm not an expert coder, I'm in high school living in Idaho.
+About me
+I'm not an expert coder, I'm in High School living in Idaho.
 Feedback would be helpful, feel free to use these at your own expense.
 
 Theses scripts are made to help secure systems for CyberPatriot
