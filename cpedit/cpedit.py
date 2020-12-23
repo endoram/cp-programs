@@ -19,11 +19,11 @@ def open_file():
     my_text.delete("1.0", END)
 
     # Grab Filename
-    text_file = filedialog.askopenfilename(initialdir = "/home/ken/Documents/git/cpedit", title = "Open File", filetypes = (("text files", ".txt"), ("all Files", "*.*")))
-    # Update Status Bar
+    text_file = filedialog.askopenfilename(initialdir = "/home/ken/Documents/git/cp-programs/cpedit/", title = "Open File", filetypes = (("all Files", "*.*"),("text files", ".txt")))
+    # Update Status Bars
     name = text_file
-    status_bar.config(f'{name}        ')
-    name = name.replace("/home/ken/Documents/git/cpedit", "")
+    status_bar.config(text=f'{name}        ')
+    name = name.replace("/home/ken/Documents/git/cp-programs/cpedit/", "")
     root.title(f'{name} - CyberPatriot Editor')
 
     # Open the File
@@ -33,6 +33,23 @@ def open_file():
     my_text.insert(END, stuff)
     # Close the opened file
     text_file.close()
+
+
+# Save As File
+def save_as_file():
+    text_file = filedialog.asksaveasfilename(defaultextension=".*", initialdir="/home/ken/Documents/git/cp-programs/cpedit/", title="Save File", filetypes=(("all Files", "*.*"),("text files", ".txt")))
+    if text_file:
+        # Update Status Bars
+        name = text_file
+        status_bar.config(text=f'Saved: {name}        ')
+        name = name.replace("/home/ken/Documents/git/cp-programs/cpedit/", "")
+        root.title(f'{name} - CyberPatriot Editor')
+        # Save the File
+        text_file = open(text_file, 'w')
+        text_file.write(my_text.get(1.0, END))
+        # Close the File
+        text_file.close()
+
 
 # Create Main Frame
 my_frame = Frame(root)
@@ -59,8 +76,8 @@ file_menu = Menu(my_menu, tearoff=False)
 my_menu.add_cascade(label="File", menu=file_menu)
 file_menu.add_command(label="New", command=new_file)
 file_menu.add_command(label="Open", command=open_file)
-file_menu.add_command(label="Save")
-file_menu.add_command(label="Save As")
+file_menu.add_command(label="Save" )
+file_menu.add_command(label="Save As", command=save_as_file)
 file_menu.add_separator()
 file_menu.add_command(label="Exit", command=root.quit)
 
