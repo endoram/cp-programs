@@ -14,9 +14,15 @@ else:
 #root.tk.call('wm', 'iconphoto', root._w, PhotoImage(file='squadronlogo.gif'))
 root.geometry("1200x660")
 
+# Global Variables
 # Set variable for Open Filename
 global open_status_name
 open_status_name = False
+
+global selected
+selected = False
+
+
 
 # Create New File Fuction
 def new_file():
@@ -85,7 +91,51 @@ def save_file():
         filename = filedialog.asksaveasfile(mode='w')
         file_save()
 
+# Cut Text
+def cut_text(e):
+	global selected
+	# Check if keyboard shortcut used
+	if e:
+		selected = root.clipboard_get()
+	else:	
+		if my_text.selection_get():
+			# Grab selected text from textbox
+			selected = my_text.selection_get()
+			# Delete selected text from texbox
+			my_text.delete("sel.first", "sel.last")
+			# Clear the clipboard
+			root.clipboard_clear()
+			root.clipboard_appemnd(selected)
 
+# Copy Text
+def copy_text(e):
+	global selected
+	# Check if keyboard shortcut used
+	if e:
+		selected = root.clipboard_get()
+	else:	
+		if my_text.selection_get():
+			# Grab selected text from textbox
+			selected = my_text.selection_get()
+			# Clear the clipboard
+			root.clipboard_clear()
+			root.clipboard_appemnd(selected)
+# Paste Text
+def paste_text(e):
+	# Find cursor to determine where to paste
+	global selected
+	# Check if keyboard shortcut used
+	if e:
+		selected = root.clipboard_get()
+	else:
+		if selected:
+			position = my_text.index(INSERT)
+			my_text.insert(position, selected)
+			# Clear the clipboard
+			root.clipboard_clear()
+			root.clipboard_appemnd(selected)
+	
+	
 # Create Main Frame
 my_frame = Frame(root)
 my_frame.pack(fill=BOTH, expand=True)
@@ -120,9 +170,9 @@ file_menu.add_command(label="Exit", command=root.quit)
 # Add Edit menu
 edit_menu = Menu(my_menu, tearoff=False)
 my_menu.add_cascade(label="Edit", menu=edit_menu)
-edit_menu.add_command(label="Cut")
-edit_menu.add_command(label="Copy")
-edit_menu.add_command(label="Paste")
+edit_menu.add_command(label="Cut   Ctrl+X", command=lambda: cut_text(False))
+edit_menu.add_command(label="Copy  Ctrl+C", command=lambda: copy_text(False))
+edit_menu.add_command(label="Paste Ctrl+V", command=lambda: paste_text(False))
 edit_menu.add_separator()
 edit_menu.add_command(label="Undo")
 edit_menu.add_command(label="Redo")
@@ -133,6 +183,11 @@ status_frame.pack(fill=BOTH, side=BOTTOM, expand=False)
 status_bar = Label(status_frame, text='Ready    ', anchor=E)
 status_bar.pack(fill=BOTH, side=BOTTOM, ipady=5)
 
-#
+# Edit Bindings
+root.bind('<Control-Key-x>', cut_text)
+root.bind('<Control-Key-c>', copy_text)
+root.bind('<Control-Key-v>', paste_text)
+
+
 
 root.mainloop()
