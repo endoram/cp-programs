@@ -4,9 +4,14 @@ from tkinter import font
 
 root = Tk()
 root.title('CyberPatriot Editor')
-#root.iconbitmap('/home/ken/Documents/git/cpedit/squadronlogo2.ico')
-#root.iconphoto(True, PhotoImage(file="/home/ken/Documents/git/cpedit/squadronlogo2.ico"))
-#root.tk.call('wm', 'iconphoto', root._w, PhotoImage(file='squadronlogo2.ico'))
+# Tests if Windows for icon
+if (sys.platform.startswith('win')):
+    root.iconbitmap('squadronlogo.ico')
+else:
+    logo = PhotoImage(file='squadronlogo.gif')
+    root.call('wm', 'iconphoto', root._w, logo)
+# Use Below if you are only on Linux
+#root.tk.call('wm', 'iconphoto', root._w, PhotoImage(file='squadronlogo.gif'))
 root.geometry("1200x660")
 
 # Set variable for Open Filename
@@ -83,7 +88,7 @@ def save_file():
 
 # Create Main Frame
 my_frame = Frame(root)
-my_frame.pack(fill=X)
+my_frame.pack(fill=BOTH, expand=True)
 
 # Create Scrollbar
 text_scroll = Scrollbar(my_frame)
@@ -92,7 +97,8 @@ text_scroll.pack(side=RIGHT, fill=Y)
 # Create Text Box
 my_text = Text(my_frame, font=("Helvetica", 16), selectbackground="yellow", selectforeground="black", undo=True, yscrollcommand=text_scroll.set)
 #width=97, height=25,
-my_text.pack(side=LEFT, fill=BOTH, expand=YES)
+my_text.pack( fill=BOTH, expand=YES)
+#side=LEFT,
 
 # Configure Scroolbar
 text_scroll.config(command=my_text.yview)
@@ -122,9 +128,11 @@ edit_menu.add_command(label="Undo")
 edit_menu.add_command(label="Redo")
 
 # Add Status Bar to the bottom of main window
-status_bar = Label(root, text='Ready        ', anchor=E)
-status_bar.pack(fill=X, side=BOTTOM, ipady=5)
+status_frame = Frame()
+status_frame.pack(fill=BOTH, side=BOTTOM, expand=False)
+status_bar = Label(status_frame, text='Ready    ', anchor=E)
+status_bar.pack(fill=BOTH, side=BOTTOM, ipady=5)
 
-
+#
 
 root.mainloop()
