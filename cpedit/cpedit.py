@@ -144,19 +144,19 @@ my_frame.pack(fill=BOTH, expand=True)
 text_scroll = Scrollbar(my_frame)
 text_scroll.pack(side=RIGHT, fill=Y)
 
-# Horizontal Scrollbar (Not Working)
-#hor_scroll = Scrollbar(my_frame, orient='horizontal')
-#hor_scroll.pack(side=RIGHT, fill=X)
+# Horizontal Scrollbar 
+hor_scroll = Scrollbar(my_frame, orient='horizontal')
+hor_scroll.pack(side=BOTTOM, fill=X)
 
 # Create Text Box
-my_text = Text(my_frame, font=("Helvetica", 16), selectbackground="yellow", selectforeground="black", undo=True, yscrollcommand=text_scroll.set, wrap="none")
+my_text = Text(my_frame, font=("Helvetica", 16), selectbackground="yellow", selectforeground="black", undo=True, yscrollcommand=text_scroll.set, wrap="none", xscrollcommand=hor_scroll.set)
 #width=97, height=25,
 my_text.pack( fill=BOTH, expand=YES)
 #side=LEFT,
 
 # Configure Scroolbar
 text_scroll.config(command=my_text.yview)
-#hor_scroll.config(command=my_text.xview)
+hor_scroll.config(command=my_text.xview)
 
 # Create Menu
 my_menu = Menu(root)
@@ -189,7 +189,7 @@ edit_menu.add_command(label="Redo", command=my_text.edit_redo, accelerator="Ctrl
 #status_bar.pack(fill=BOTH, side=BOTTOM, ipady=15)
 
 status_bar = Label(root, text='Ready    ', anchor=E)
-status_bar.pack(fill=BOTH, side=BOTTOM, ipady=15)
+status_bar.pack(fill=BOTH, side=BOTTOM, ipady=5)
 
 # Edit Bindings
 root.bind('<Control-Key-x>', cut_text)
