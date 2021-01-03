@@ -1,3 +1,4 @@
+import tkinter as tk
 from tkinter import *
 from tkinter import filedialog
 from tkinter import font
@@ -11,7 +12,7 @@ else:
     logo = PhotoImage(file='squadronlogo.gif')
     root.call('wm', 'iconphoto', root._w, logo)
 # Use Below if you are only on Linux
-#root.tk.call('wm', 'iconphoto', root._w, PhotoImage(file='squadronlogo.gif'))
+# root.tk.call('wm', 'iconphoto', root._w, PhotoImage(file='squadronlogo.gif'))
 root.geometry("1200x680")
 
 # Global Variables
@@ -22,10 +23,9 @@ open_status_name = False
 global selected
 selected = False
 
-
-
-# Create New File Fuction
+# Create New File Function
 def new_file():
+
     my_text.delete("1.0", END)
     status_bar.config(text="New File   ")
     global open_status_name
@@ -134,7 +134,46 @@ def paste_text(e):
 			# Clear the clipboard
 			root.clipboard_clear()
 			root.clipboard_appemnd(selected)
+
+# Bold Text
+def bold_it():
+	# Create our font
+	bold_font = font.Font()
+	bold_font.configure(weight="bold")
+	# Configure a Tag
+	my_text.tag_configure("bold", font=bold_font)
 	
+	# Define Current Tags
+	current_tags = my_text.tag_names("sel.first")
+	
+	if "bold" in current_tags:
+		my_text.tag_remove("bold", "sel.first", "sel.last")
+	else:
+		my_text.tag_add("bold", "sel.first", "sel.last")
+
+
+# Italics Text
+def italics_it():
+	# Create our font
+	italics_font = font.Font()
+	italics_font.configure(slant="italic")
+	# Configure a Tag
+	my_text.tag_configure("italic", font=italics_font)
+	
+	# Define Current Tags
+	current_tags = my_text.tag_names("sel.first")
+	
+	if "italic" in current_tags:
+		my_text.tag_remove("italic", "sel.first", "sel.last")
+	else:
+		my_text.tag_add("italic", "sel.first", "sel.last")	
+
+
+
+# Create a Toolbar Frame	
+toolbar_frame = Frame(root)
+toolbar_frame.pack(fill=X)
+
 	
 # Create Main Frame
 my_frame = Frame(root)
@@ -195,6 +234,17 @@ status_bar.pack(fill=BOTH, side=BOTTOM, ipady=5)
 root.bind('<Control-Key-x>', cut_text)
 root.bind('<Control-Key-c>', copy_text)
 root.bind('<Control-Key-v>', paste_text)
+
+# Create Buttons
+
+# Bold Button
+bold_button = Button(toolbar_frame, text="Bold",  command=bold_it)
+bold_button.grid(row=0, column=0, sticky=W, padx=2)
+
+# Italics Button
+italics_button = Button(toolbar_frame, text="Italics",  command=italics_it)
+italics_button.grid(row=0, column=1, padx=2)
+
 
 
 

@@ -1,0 +1,136 @@
+Metadata-Version: 2.1
+Name: AwesomeTkinter
+Version: 2020.12.16
+Summary: Pretty tkinter widgets
+Home-page: https://github.com/Aboghazala/AwesomeTkinter
+Author: Mahmoud Elshahat
+Author-email: 
+License: UNKNOWN
+Project-URL: Source, https://github.com/Aboghazala/AwesomeTkinter
+Project-URL: Tracker, https://github.com/Aboghazala/AwesomeTkinter/issues
+Project-URL: Releases, https://github.com/Aboghazala/AwesomeTkinter/releases
+Project-URL: Screenshots, https://github.com/Aboghazala/AwesomeTkinter/issues/1
+Keywords: tkinter gui python
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+Requires-Dist: pillow
+
+AwesomeTkinter offers some pretty tkinter widgets  
+These widgets are just a pure tkinter widgets with custom styles.
+
+current available widgets:
+- radial progressbar (flat or 3d).
+- scrollable frames,
+- 3d buttons,
+- 3d frames.
+- Scrollable text widget
+- radiobutton with better indicator/check mark quality.
+- simple scrollbar "without arrow heads"
+
+new widgets are coming soon
+
+
+# Screenshots:
+![progressbar](https://user-images.githubusercontent.com/37757246/93717162-3c059b80-fb74-11ea-9998-00fc5ba82ca3.png)
+
+[More Screenshots](https://github.com/Aboghazala/AwesomeTkinter/issues/1)
+
+--------------------------------------------------------------------------------------------------------------------
+
+
+# Applications examples that uses AwesomeTkinter:
+- [PyIDM](https://github.com/pyIDM/PyIDM)
+
+![PyIDM](https://user-images.githubusercontent.com/58998813/92564079-e4fcee00-f278-11ea-83e1-9a272bc06b0f.png)
+
+# Installation:
+`python pip install awesometkinter` on windows  
+`python3 pip install awesometkinter` on linux
+
+for quick test:
+```
+import awesometkinter as atk
+atk.main()
+```
+
+or from terminal:
+```
+python3 -m awesometkinter
+or just
+awesometkinter
+```
+this will display a test window
+
+# Requirements:
+- minimum python version 3.6
+- tkinter
+- pillow
+
+# Limitations:
+- tkinter theme should be 'default', 'alt', or 'classic' for things to
+  work fine on windows, so after creating your root you should change
+  theme like example below
+
+
+# Example:
+```
+import tkinter as tk
+from tkinter import ttk
+import awesometkinter as atk
+
+# our root
+root = tk.Tk()
+root.config(background=atk.DEFAULT_COLOR)
+
+# select tkinter theme required for things to be right on windows,
+# only 'alt', 'default', or 'classic' can work fine on windows 10
+s = ttk.Style()
+s.theme_use('default')
+
+# 3d frame
+f1 = atk.Frame3d(root)
+f1.pack(side='left', expand=True, fill='both', padx=3, pady=3)
+
+# 3d progressbar
+bar = atk.RadialProgressbar3d(f1, fg='cyan', size=120)
+bar.pack(padx=20, pady=20)
+bar.start()
+
+# 3d button
+atk.Button3d(f1, text='3D Button').pack(pady=10)
+
+f2 = atk.Frame3d(root)
+f2.pack(side='left', expand=True, fill='both', padx=3, pady=3)
+
+# flat radial progressbar
+bar = atk.RadialProgressbar(f2, fg='green')
+bar.pack(padx=30, pady=30)
+bar.start()
+
+atk.Button3d(f2, text='Pressed Button').pack(pady=10)
+
+root.mainloop()
+```
+
+also, you can use a lot of useful functions that manipulate images, e.g.
+to create a tkinter PhotoImage from a file but want to change its size
+and color:
+```
+img = atk.create_image(fp='path to my image file', color='red', size=(150, 100))
+```
+
+# Documentations:
+TBA
+
+---
+# Author:
+Mahmoud Elshahat  
+2020
+
+

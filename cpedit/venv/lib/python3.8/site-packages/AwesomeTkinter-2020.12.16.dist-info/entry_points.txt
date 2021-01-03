@@ -1,0 +1,3 @@
+[console_scripts]
+awesometkinter = awesometkinter.__init__:main
+
